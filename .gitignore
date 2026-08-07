@@ -1,0 +1,6 @@
+.DS_Store
+old_ignore/
+data/sheet_raw.csv
+data/.pending.json
+data/.pending_ts
+*.log

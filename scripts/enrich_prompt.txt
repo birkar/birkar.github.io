@@ -1,0 +1,13 @@
+You are running as an unattended weekly job with no human to ask follow-up questions. Read the JSON array at data/.pending.json. Each item has:
+  - row_date: the date (YYYY-MM-DD) this item was logged as read/watched
+  - raw: a free-text mention of something read or watched, possibly in English, Urdu, or romanized Hindi/Urdu, in inconsistent formats ("Title, Author", "Title by Author", a bare URL, or a title with a trailing note like "(should finish)")
+
+For each item:
+1. Identify the real title and author (or channel, for YouTube).
+2. Classify format as one of: essay, book, movie, youtube, other.
+3. Use web search to find one canonical/authoritative URL: the original essay/article page, a Goodreads or publisher page for books, IMDb for movies, the actual YouTube link for videos. If a URL is already given in the raw text and it's correct, prefer it.
+4. Assign 2-4 short lowercase topical tags reflecting the actual subject matter (e.g. "history", "linguistics", "iran", "urdu-literature") based on what the piece is actually about, not generic labels.
+5. If you cannot confidently resolve an item after searching (too vague, no matching result), skip it entirely. Do not guess or fabricate a title, author, or URL.
+6. Before adding a row, check the existing data/reading.csv for a row with the same or clearly-the-same title+author (allowing for phrasing differences) and skip it if already present — do not duplicate.
+
+Append one CSV row per resolved item to data/reading.csv, matching its existing column order (date,author,title,format,url,tags,raw). Join multiple tags with ";". Use row_date as the date field. Put the original unmodified raw text in the raw field. Do not add a header row (one already exists). Do not modify any rows already in the file, and do not touch any other files in this repo.
